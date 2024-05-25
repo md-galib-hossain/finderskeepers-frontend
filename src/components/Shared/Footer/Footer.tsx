@@ -60,7 +60,8 @@ const Footer = () => {
           py={3}
         >
           <Typography color="#fff" component="p">
-            &copy;2024 Lost & Found. All Rights Reserved.
+            &copy;2024 Finders Keepers
+. All Rights Reserved.
           </Typography>
           <Typography variant="h4" color="white" fontWeight={600} component={Link} href="/">
           Finders

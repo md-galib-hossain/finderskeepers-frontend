@@ -15,41 +15,7 @@ const HomePage = () => {
 <RecentPost/>
 <HowItWorks/>
 <HappyClients/>
-      {/* <Stack gap={2}>
-        <Box>
-          <Button
-            variant="contained"
-           size={"large"}
-           sx={{
-            bgcolor : "#EF6F6C",
-            "&:hover": {
-                bgcolor: "#465775", 
-              },
-           }}
-          >
-            haha
-          </Button>
-        </Box>
-        <Box>
-          <Button
-            variant="contained"
-            sx={{
-                bgcolor : "#56E39F",
-                "&:hover": {
-                    bgcolor: "#465775", 
-                  },
-               }}
-          >
-            haha
-          </Button>
-        </Box>
-        <Box>
-          {" "}
-          <Button variant="outlined"  sx={{
-                borderColor : "#465775"
-               }}>haha</Button>
-        </Box>
-      </Stack> */}
+    
     </>
   );
 };
