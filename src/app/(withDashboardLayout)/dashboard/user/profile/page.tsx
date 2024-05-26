@@ -1,9 +1,33 @@
-import React from 'react'
+"use client";
+
+import React, { useState } from 'react';
+import SubNavbar from "./components/SubNavbar";
+import UserFoundItems from './components/my-founditems/page';
+import UserLostItems from './components/my-lostitems/page';
+
+// import UserClaims from "../my-claims/page";
 
 const UserProfile = () => {
-  return (
-    <div>profile page</div>
-  )
-}
+  const [view, setView] = useState('lostItems');
 
-export default UserProfile
+  const renderView = () => {
+    switch (view) {
+      case 'foundItems':
+        return <UserFoundItems />;
+      // case 'claims':
+      //   return <UserClaims />;
+      case 'lostItems':
+      default:
+        return <UserLostItems />;
+    }
+  };
+
+  return (
+    <>
+      <SubNavbar activeButton={view} setView={setView} />
+      {renderView()}
+    </>
+  );
+};
+
+export default UserProfile;

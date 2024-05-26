@@ -87,15 +87,16 @@ switch(role){
                   icon: DashboardIcon,
                },
                {
-                  title: 'My Lost Items',
-                  path: `${role}/my-lostitems`,
+                  title: 'Lost Items',
+                  path: `${role}/lostitems`,
                   icon: CalendarMonthIcon,
                },
                {
-                  title: 'My Found Items',
-                  path: `${role}/my-founditems`,
+                  title: 'Found Items',
+                  path: `${role}/founditems`,
                   icon: BookOnlineIcon,
                },
+             
                
             );
             break;
