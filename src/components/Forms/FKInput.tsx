@@ -13,7 +13,7 @@ type TInputProps = {
     required? : boolean
 
 }
-const CCInput = ({name,label,type = "text",size = "small",fullWidth,sx,placeholder,required} : TInputProps) => {
+const FKInput = ({name,label,type = "text",size = "small",fullWidth,sx,placeholder,required} : TInputProps) => {
     const {control} = useFormContext()
   return (
     <Controller
@@ -40,4 +40,4 @@ const CCInput = ({name,label,type = "text",size = "small",fullWidth,sx,placehold
   )
 }
 
-export default CCInput
+export default FKInput

@@ -11,7 +11,7 @@ type TProps = {
   sx?: SxProps;
 };
 
-export default function CCFileUploader({ name, label, sx }: TProps) {
+export default function FKFileUploader({ name, label, sx }: TProps) {
   const { control } = useFormContext();
   return (
     <Controller
@@ -22,10 +22,18 @@ export default function CCFileUploader({ name, label, sx }: TProps) {
           <Button
             component="label"
             role={undefined}
-            variant="contained"
+            variant="outlined"
             tabIndex={-1}
             startIcon={<CloudUploadIcon />}
-            sx={{ ...sx }}
+            sx={{ ...sx,
+              borderColor: "#465775",
+              color: "#465775",
+              "&:hover": {
+                color: "#465775",
+                borderColor: "#465775",
+
+              },
+             }}
           >
             {label || "Upload File"}
             <Input {...field} type={name} value={value?.fileName}

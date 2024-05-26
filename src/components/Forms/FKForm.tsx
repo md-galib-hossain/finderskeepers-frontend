@@ -14,7 +14,7 @@ type TFormProps = {
   onSubmit: SubmitHandler<FieldValues>;
 
 } & TFormConfig;
-const CCForm = ({ children, onSubmit, resolver,defaultValues }: TFormProps) => {
+const FKForm = ({ children, onSubmit, resolver,defaultValues }: TFormProps) => {
   const formConfig: TFormConfig = {};
   if (resolver) {
     formConfig["resolver"] = resolver;
@@ -36,4 +36,4 @@ const CCForm = ({ children, onSubmit, resolver,defaultValues }: TFormProps) => {
   );
 };
 
-export default CCForm;
+export default FKForm;

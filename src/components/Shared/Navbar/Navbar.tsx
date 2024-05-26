@@ -34,7 +34,7 @@ const Navbar = () => {
           <Typography component={Link} href="/">
             Home{" "}
           </Typography>
-          <Typography component={Link} href="/my-profile">
+          <Typography component={Link} href="dashboard/">
             My Profile
           </Typography>
           <Typography component={Link} href="/posts">

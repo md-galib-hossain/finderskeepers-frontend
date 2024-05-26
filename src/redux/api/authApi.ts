@@ -5,7 +5,7 @@ const AUTH_URL = '/auth';
 export const authApi = baseApi.injectEndpoints({
    endpoints: (build) => ({
       userLogin: build.mutation({
-         query: (loginData) => ({
+         query: (loginData ) => ({
             url: `${AUTH_URL}/login`,
             method: 'POST',
             data: loginData,
@@ -25,6 +25,7 @@ export const authApi = baseApi.injectEndpoints({
          query: (data) => ({
             url: `${AUTH_URL}/forgot-password`,
             method: 'POST',
+            
             data: data,
          }),
          invalidatesTags: [tagTypes.user],

@@ -14,7 +14,7 @@ interface IDatePicker {
   sx?: SxProps;
 }
 
-const CCDatePicker = ({
+const FKDatePicker = ({
   name,
   size = "small",
   label,
@@ -59,4 +59,4 @@ const CCDatePicker = ({
   );
 };
 
-export default CCDatePicker;
+export default FKDatePicker;

@@ -9,8 +9,8 @@ import KeyIcon from '@mui/icons-material/Key';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import logoutUser from '@/app/services/actions/logoutUser';
-import CCInput from '@/components/Forms/CCInput';
-import CCForm from '@/components/Forms/CCForm';
+import FKInput from '@/components/Forms/FKInput';
+import FKForm from '@/components/Forms/FKForm';
 import { useChangePasswordMutation } from '@/redux/api/authApi';
 type TRes ={
    message : string
@@ -71,14 +71,14 @@ const ChangePassword = () => {
                Change password
             </Typography>
          </Stack>
-         <CCForm
+         <FKForm
             onSubmit={onSubmit}
             defaultValues={{ oldPassword: '', newPassword: '' }}
             resolver={zodResolver(validationSchema)}
          >
             <Grid>
                <Grid item xs={12} sm={12} md={6}>
-                  <CCInput
+                  <FKInput
                      name='oldPassword'
                      type='password'
                      label='Old Password'
@@ -87,7 +87,7 @@ const ChangePassword = () => {
                   />
                </Grid>
                <Grid item xs={12} sm={12} md={6}>
-                  <CCInput
+                  <FKInput
                      name='newPassword'
                      type='password'
                      label='New Password'
@@ -100,7 +100,7 @@ const ChangePassword = () => {
             <Button type='submit' sx={{ width: '100%', my: 2 }}>
                change Password
             </Button>
-         </CCForm>
+         </FKForm>
       </Box>
    );
 };

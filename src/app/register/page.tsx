@@ -14,8 +14,8 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { userLogin } from "../services/actions/userLogin";
 import { storeUserInfo } from "../services/auth.services";
-import CCForm from "@/components/Forms/CCForm";
-import CCInput from "@/components/Forms/CCInput";
+import FKForm from "@/components/Forms/FKForm";
+import FKInput from "@/components/Forms/FKInput";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -150,14 +150,14 @@ const RegisterPage = () => {
           {/* Input fields parent box */}
           <Box>
             <FormProvider {...methods}>
-              <CCForm onSubmit={handleRegister}>
+              <FKForm onSubmit={handleRegister}>
                 {/* Parent grid */}
                 <Grid container spacing={2} my={1}>
                   <Grid item md={12}>
-                    <CCInput name="name" label="Name" fullWidth={true} />
+                    <FKInput name="name" label="Name" fullWidth={true} />
                   </Grid>
                   <Grid item md={6}>
-                    <CCInput
+                    <FKInput
                       label="Email"
                       type="email"
                       fullWidth={true}
@@ -165,7 +165,7 @@ const RegisterPage = () => {
                     />
                   </Grid>
                   <Grid item md={6}>
-                    <CCInput
+                    <FKInput
                       label="Password"
                       type="password"
                       fullWidth={true}
@@ -173,7 +173,7 @@ const RegisterPage = () => {
                     />
                   </Grid>
                   <Grid item md={6}>
-                    <CCInput
+                    <FKInput
                       label="Bio"
                       type="text"
                       fullWidth={true}
@@ -181,7 +181,7 @@ const RegisterPage = () => {
                     />
                   </Grid>
                   <Grid item md={6}>
-                    <CCInput
+                    <FKInput
                       label="Age"
                       type="number"
                       fullWidth={true}
@@ -208,7 +208,7 @@ const RegisterPage = () => {
                     <Link href="/login">Login</Link>
                   </Box>
                 </Typography>
-              </CCForm>
+              </FKForm>
             </FormProvider>
           </Box>
         </Box>

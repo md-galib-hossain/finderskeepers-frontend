@@ -16,8 +16,8 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { userLogin } from "../services/actions/userLogin";
 import { toast } from "sonner";
 import { getUserInfo, storeUserInfo } from "../services/auth.services";
-import CCForm from "@/components/Forms/CCForm";
-import CCInput from "@/components/Forms/CCInput";
+import FKForm from "@/components/Forms/FKForm";
+import FKInput from "@/components/Forms/FKInput";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -104,7 +104,7 @@ const [error,setError] = useState("")
 
           {/* */}
           <Box>
-            <CCForm onSubmit={handleLogin} resolver={zodResolver(validationSchema)}
+            <FKForm onSubmit={handleLogin} resolver={zodResolver(validationSchema)}
             defaultValues={{
               email : "",
               password : ""
@@ -113,7 +113,7 @@ const [error,setError] = useState("")
               {/* parent grid */}
               <Grid container spacing={2} my={1}>
                 <Grid item md={6}>
-                  <CCInput 
+                  <FKInput 
                     name="email"
                     label="Email"
                     type="email"
@@ -121,7 +121,7 @@ const [error,setError] = useState("")
                   />
                 </Grid>
                 <Grid item md={6}>
-                  <CCInput 
+                  <FKInput 
                   name="password"
                     label="Password"
                     type="password"
@@ -151,7 +151,7 @@ const [error,setError] = useState("")
                   <Link href="/register">Register</Link>
                 </Box>
               </Typography>
-            </CCForm>
+            </FKForm>
           </Box>
         </Box>
       </Stack>

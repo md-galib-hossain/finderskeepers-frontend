@@ -13,7 +13,7 @@ interface ITextField {
   items: string[];
 }
 
-const CCSelectField = ({
+const FKSelectField = ({
   items,
   name,
   label,
@@ -45,9 +45,9 @@ const CCSelectField = ({
             isError ? (formState.errors[name]?.message as string) : ""
           }
         >
-          {items.map((name) => (
-            <MenuItem key={name} value={name}>
-              {name}
+          {items?.map((item : any) => (
+            <MenuItem key={item.id} value={item.id}>
+              {item.name}
             </MenuItem>
           ))}
         </TextField>
@@ -56,4 +56,4 @@ const CCSelectField = ({
   );
 };
 
-export default CCSelectField;
+export default FKSelectField;
