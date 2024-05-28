@@ -11,7 +11,6 @@ type TInputProps = {
     sx? : SxProps;
     placeholder?:string;
     required? : boolean
-
 }
 const FKInput = ({name,label,type = "text",size = "small",fullWidth,sx,placeholder,required} : TInputProps) => {
     const {control} = useFormContext()
@@ -30,6 +29,7 @@ const FKInput = ({name,label,type = "text",size = "small",fullWidth,sx,placehold
          size={size}
          fullWidth={fullWidth}
          sx={{...sx}}
+         
          placeholder={placeholder ? placeholder : label}
          required={required}
          error={!!error?.message} //it will confirm if there is error & its recieve only boolean

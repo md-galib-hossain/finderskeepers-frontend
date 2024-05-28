@@ -14,6 +14,17 @@ export const lostItemApi = baseApi.injectEndpoints({
       }},
       invalidatesTags: [tagTypes.lostItem, tagTypes.user],
     }),
+    updateLostItem: build.mutation({
+      query: (data) => {
+        console.log("Data being sent:", data);
+       return {
+        url: "/lost-items",
+        method: "PATCH",
+       
+        data: data,
+      }},
+      invalidatesTags: [tagTypes.lostItem, tagTypes.user],
+    }),
     getAllLostItems: build.query({
       query: () => ({
         url: "/my-lostitems",
@@ -46,5 +57,5 @@ export const lostItemApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCreateLostItemMutation,useMarkAsFoundMyLostItemMutation, useGetAllLostItemsQuery,useSoftDeleteMyLostItemMutation } =
+export const { useCreateLostItemMutation,useMarkAsFoundMyLostItemMutation, useGetAllLostItemsQuery,useSoftDeleteMyLostItemMutation,useUpdateLostItemMutation } =
   lostItemApi;

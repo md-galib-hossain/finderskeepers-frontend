@@ -3,6 +3,7 @@ import FKFileUploader from "@/components/Forms/FKFileUploader";
 import FKForm from "@/components/Forms/FKForm";
 import FKInput from "@/components/Forms/FKInput";
 import FKSelectField from "@/components/Forms/FKSelectField";
+import FKTextArea from "@/components/Forms/FKTextArea";
 import { useGetAllCategoriesQuery } from "@/redux/api/categoryApi";
 import { useCreateLostItemMutation } from "@/redux/api/lostItemApi";
 import uploadToImgBB from "@/utils/uploadToImgBB";
@@ -48,7 +49,10 @@ const MyLostItemModal = ({ open, setOpen }: TOpenProps) => {
             <FKSelectField fullWidth={true} sx={{ width: "100%" }} items={categories} name="categoryId" label="Category" />
           </Grid>
           <Grid item xs={12}>
-            <FKInput fullWidth={true} name="description" label="Details about Item" />
+          <FKTextArea
+                     name="description"
+                     label="Details about Item"
+                    />
           </Grid>
           <Grid item xs={12} md={5}>
             <FKInput fullWidth={true} name="contactNo" label="Contact No." />

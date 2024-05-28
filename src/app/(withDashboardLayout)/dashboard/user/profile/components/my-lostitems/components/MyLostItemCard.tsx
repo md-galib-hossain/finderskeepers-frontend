@@ -1,7 +1,4 @@
-import {
-  useMarkAsFoundMyLostItemMutation,
-  useSoftDeleteMyLostItemMutation,
-} from "@/redux/api/lostItemApi";
+
 import {
   Box,
   Button,
@@ -19,6 +16,7 @@ import RoomIcon from "@mui/icons-material/Room";
 import { toast } from "sonner";
 import ViewFullCardModal from "./ViewFullCardModal";
 import { useState } from "react";
+import { useMarkAsFoundMyLostItemMutation, useSoftDeleteMyLostItemMutation } from "@/redux/api/lostItemApi";
 
 const MyLostItemCard = ({ lostItem }: { lostItem: any }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -171,7 +169,7 @@ const MyLostItemCard = ({ lostItem }: { lostItem: any }) => {
             <Button
               fullWidth={true}
               variant="contained"
-              size={"large"}
+             
               sx={{
                 bgcolor: "#56E39F",
                 "&:hover": {

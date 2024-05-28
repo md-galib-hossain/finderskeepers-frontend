@@ -16,7 +16,7 @@ import RoomIcon from "@mui/icons-material/Room";
 import { toast } from "sonner";
 import ViewFullCardModal from "./ViewFullCardModal";
 import { useState } from "react";
-import { useSoftDeleteMyFoundItemMutation } from "@/redux/api/foundItemApi";
+import { useMarkAsClaimedMyFoundItemMutation, useSoftDeleteMyFoundItemMutation } from "@/redux/api/foundItemApi";
 
 const MyFoundItemCard = ({ foundItem }: { foundItem: any }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -24,7 +24,20 @@ const MyFoundItemCard = ({ foundItem }: { foundItem: any }) => {
   const maxTextLength = 100; // Adjust the length limit as needed
   const [softDeleteMyFoundItem, { isLoading: deleting }] =
     useSoftDeleteMyFoundItemMutation();
-  
+  const [markAsClaimedMyFoundItem,{isLoading : claiming} ] = useMarkAsClaimedMyFoundItemMutation()
+
+    const handleMarkAsClaim = async (id: string) => {
+      try {
+        const res = await markAsClaimedMyFoundItem(id).unwrap();
+        console.log(res);
+        if (res.id) {
+          toast.success("Found Item marked as claimed!!!");
+        }
+      } catch (err: any) {
+        console.log(err);
+      }
+    };
+
   const truncateText = (text: string, maxLength: number) => {
     if (text.length > maxLength) {
       return text.slice(0, maxLength) + "...";
@@ -154,6 +167,22 @@ const MyFoundItemCard = ({ foundItem }: { foundItem: any }) => {
           >
             View Full Post
           </Button>
+          { foundItem?.foundItemStatus === "NOTFOUND" && (
+            <Button
+              fullWidth={true}
+              disabled={claiming}
+              variant="contained"
+              sx={{
+                bgcolor: "#56E39F",
+                "&:hover": {
+                  bgcolor: "#465775",
+                },
+              }}
+              onClick={() => handleMarkAsClaim(foundItem.id)}
+            >
+              Mark as Claimed
+            </Button>
+          )}
          
         </CardActions>
       </Card>

@@ -32,8 +32,30 @@ export const foundItemApi = baseApi.injectEndpoints({
       }},
       invalidatesTags: [tagTypes.lostItem, tagTypes.user],
     }),
+    updateFoundItem: build.mutation({
+      query: (data) => {
+        console.log("Data being sent:", data);
+       return {
+        url: "/found-items",
+        method: "PATCH",
+       
+        data: data,
+      }},
+      invalidatesTags: [tagTypes.user,tagTypes.foundItem],
+    }),
+    markAsClaimedMyFoundItem: build.mutation({
+      query: (id : string) => {
+        console.log("Data being sent:", id);
+       return {
+        url: `/found-items/${id}`,
+        method: "PATCH",
+       
+       
+      }},
+      invalidatesTags: [tagTypes.lostItem, tagTypes.user],
+    }),
   }),
 });
 
-export const { useCreateFoundItemMutation, useGetAllFoundItemsQuery,useSoftDeleteMyFoundItemMutation } =
+export const { useCreateFoundItemMutation,useMarkAsClaimedMyFoundItemMutation,useUpdateFoundItemMutation, useGetAllFoundItemsQuery,useSoftDeleteMyFoundItemMutation } =
 foundItemApi;
