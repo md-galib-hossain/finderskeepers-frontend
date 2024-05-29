@@ -12,14 +12,24 @@ export const foundItemApi = baseApi.injectEndpoints({
        
         data: data,
       }},
-      invalidatesTags: [tagTypes.lostItem, tagTypes.user],
+      invalidatesTags: [tagTypes.foundItem, tagTypes.user],
     }),
     getAllFoundItems: build.query({
+      query: (args : Record<string,any>) => ({
+        url: "/found-items",
+        method: "GET",
+        params: args
+      }),
+      providesTags: [tagTypes.user, tagTypes.foundItem],
+    }),
+
+    getMyAllFoundItems: build.query({
       query: () => ({
         url: "/my-founditems",
         method: "GET",
+     
       }),
-      providesTags: [tagTypes.user, tagTypes.lostItem],
+      providesTags: [tagTypes.user, tagTypes.foundItem],
     }),
     softDeleteMyFoundItem: build.mutation({
       query: (id : string) => {
@@ -30,7 +40,7 @@ export const foundItemApi = baseApi.injectEndpoints({
        
        
       }},
-      invalidatesTags: [tagTypes.lostItem, tagTypes.user],
+      invalidatesTags: [tagTypes.foundItem, tagTypes.user],
     }),
     updateFoundItem: build.mutation({
       query: (data) => {
@@ -47,15 +57,15 @@ export const foundItemApi = baseApi.injectEndpoints({
       query: (id : string) => {
         console.log("Data being sent:", id);
        return {
-        url: `/found-items/${id}`,
+        url: `/my-founditems/${id}`,
         method: "PATCH",
        
        
       }},
-      invalidatesTags: [tagTypes.lostItem, tagTypes.user],
+      invalidatesTags: [tagTypes.foundItem, tagTypes.user],
     }),
   }),
 });
 
-export const { useCreateFoundItemMutation,useMarkAsClaimedMyFoundItemMutation,useUpdateFoundItemMutation, useGetAllFoundItemsQuery,useSoftDeleteMyFoundItemMutation } =
+export const { useCreateFoundItemMutation,useMarkAsClaimedMyFoundItemMutation,useUpdateFoundItemMutation,useGetAllFoundItemsQuery,useGetMyAllFoundItemsQuery,useSoftDeleteMyFoundItemMutation } =
 foundItemApi;

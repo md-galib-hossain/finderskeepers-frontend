@@ -4,7 +4,7 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import dayjs from "dayjs";
 import { SxProps } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
-
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 interface IDatePicker {
   name: string;
   size?: "small" | "medium";
@@ -35,12 +35,16 @@ const FKDatePicker = ({
             <DesktopDatePicker
             label={label}
               timezone="system"
-              disablePast
+              // disablePast
+              disableFuture
               onChange={(date) => onChange(date)}
               {...field}
               value={value || Date.now()} //current date
+              slots={{
+                openPickerIcon: CalendarMonthIcon,
+              }}
               slotProps={{
-                openPickerButton: { color: 'primary' },
+                openPickerButton: {sx :{ color: '#56E39F'} },
 
                 textField: {
                   required: required,

@@ -25,7 +25,7 @@ export const lostItemApi = baseApi.injectEndpoints({
       }},
       invalidatesTags: [tagTypes.lostItem, tagTypes.user],
     }),
-    getAllLostItems: build.query({
+    getMyAllLostItems: build.query({
       query: () => ({
         url: "/my-lostitems",
         method: "GET",
@@ -54,8 +54,16 @@ export const lostItemApi = baseApi.injectEndpoints({
       }},
       invalidatesTags: [tagTypes.lostItem, tagTypes.user],
     }),
+    getAllLostItems: build.query({
+      query: (arg: Record<string,any>) => ({
+        url: "/lost-items",
+        method: "GET",
+        params : arg
+      }),
+      providesTags: [tagTypes.user, tagTypes.lostItem],
+    }),
   }),
 });
 
-export const { useCreateLostItemMutation,useMarkAsFoundMyLostItemMutation, useGetAllLostItemsQuery,useSoftDeleteMyLostItemMutation,useUpdateLostItemMutation } =
+export const { useCreateLostItemMutation,useGetAllLostItemsQuery,useMarkAsFoundMyLostItemMutation, useGetMyAllLostItemsQuery,useSoftDeleteMyLostItemMutation,useUpdateLostItemMutation } =
   lostItemApi;

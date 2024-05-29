@@ -3,11 +3,11 @@ import { Box, Button, Grid, Stack, Typography } from '@mui/material'
 import { useState } from 'react'
 import MyFoundItemCard from './components/MyFoundItemCard'
 import MyFoundItemModal from './components/MyFoundItemModal'
-import { useGetMyAllFoundItemsQuery } from '@/redux/api/foundItemApi'
+import { useGetMyClaimsQuery } from '@/redux/api/claimApi'
 
 const UserFoundItems = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const { data: foundItems, isLoading } = useGetMyAllFoundItemsQuery({})
+  const { data: claims, isLoading } = useGetMyClaimsQuery({})
 
   return (
     <>
@@ -32,7 +32,7 @@ const UserFoundItems = () => {
         </Box>
         <Box sx={{ width: "100%", display:"flex", }} >
           <Grid container spacing={{ xs: 2, md: 2 }}>
-            {foundItems?.map((item: any, index: any) => (
+            {claims?.map((item: any, index: any) => (
               <Grid item xs={12} sm={12} md={6} lg={4} key={index}>
                 <MyFoundItemCard foundItem={item} />
               </Grid>

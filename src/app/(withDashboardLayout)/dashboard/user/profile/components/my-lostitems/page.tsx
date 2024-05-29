@@ -1,13 +1,13 @@
 "use client"
-import { useGetAllLostItemsQuery } from '@/redux/api/userApi'
 import { Box, Button, Grid, Stack, Typography } from '@mui/material'
 import { useState } from 'react'
 import MyLostItemCard from './components/MyLostItemCard'
 import MyLostItemModal from './components/MyLostItemModal'
+import { useGetMyAllLostItemsQuery } from '@/redux/api/lostItemApi'
 
 const UserLostItems = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const { data: lostItems, isLoading } = useGetAllLostItemsQuery({});
+  const { data: lostItems, isLoading } = useGetMyAllLostItemsQuery({});
 
   return (
     <>

@@ -9,3 +9,7 @@ export const dateFormatter = (value: string) => {
   
     return formattedDate;
   };
+
+  export const generateISODate = () => {
+    return new Date().toISOString();
+  };
