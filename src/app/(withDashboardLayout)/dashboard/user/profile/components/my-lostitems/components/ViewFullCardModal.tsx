@@ -33,7 +33,7 @@ const ViewFullCardModal = ({ lostItem, open, setOpen }: TOpenProps) => {
   const [editable, setEditable] = useState(false);
   const handleClose = () => setOpen(false);
   const [updateLostItem, { isLoading: updating }] = useUpdateLostItemMutation();
-  const date = new Date(lostItem.createdAt);
+  const date = new Date(lostItem?.lostDate);
   const formattedDate = date.toLocaleDateString();
 
   const { data: categories, isLoading } = useGetAllCategoriesQuery({});

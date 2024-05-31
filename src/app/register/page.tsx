@@ -79,6 +79,7 @@ const RegisterPage = () => {
           storeUserInfo(result?.data?.accessToken);
           router.push("/dashboard");
         }
+      
       } else {
         setError(`User with the same email already exists`);
       }

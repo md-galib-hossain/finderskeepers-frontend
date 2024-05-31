@@ -57,7 +57,7 @@ const MyLostItemCard = ({ lostItem }: { lostItem: any }) => {
     }
   };
 
-  const date = new Date(lostItem.createdAt);
+  const date = new Date(lostItem?.lostDate);
   const formattedDate = date.toLocaleDateString();
   return (
     <Box sx={{ width: "100%", position: "relative", margin: "0 auto" }}>

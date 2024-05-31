@@ -58,7 +58,7 @@ const FoundItemCard = ({ foundItem, user }: { foundItem: any; user: any }) => {
     }
   };
 
-  const date = new Date(foundItem.createdAt);
+  const date = new Date(foundItem?.foundDate);
   const formattedDate = date.toLocaleDateString();
  
   console.log(foundItem)

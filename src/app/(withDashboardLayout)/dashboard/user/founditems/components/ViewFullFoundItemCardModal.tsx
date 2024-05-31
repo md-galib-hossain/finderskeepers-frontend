@@ -34,7 +34,7 @@ const ViewFullCardModal = ({ foundItem, open, setOpen }: TOpenProps) => {
   const [editable, setEditable] = useState(false);
   const handleClose = () => setOpen(false);
   const [updateFoundItem, { isLoading: updating }] = useUpdateFoundItemMutation();
-  const date = new Date(foundItem.createdAt);
+  const date = new Date(foundItem?.foundDate);
   const formattedDate = date.toLocaleDateString();
 
   const { data: categories, isLoading } = useGetAllCategoriesQuery({});
@@ -59,7 +59,7 @@ console.log(updatedValues)
       const res = await updateFoundItem(updatedValues).unwrap();
       console.log(res);
       if (res?.id) {
-        toast.success("Lost Item updated successfully!");
+        toast.success("Found Item updated successfully!");
         setOpen(!open);
       }
     } catch (err: any) {
@@ -111,7 +111,7 @@ console.log(updatedValues)
                 component="img"
                 height="150" // Adjusted height
                 image={foundItem.itemImg}
-                alt="Lost Item Image"
+                alt="Found Item Image"
                 sx={{ borderRadius: 2, marginBottom: 2 }}
               />
             )}
@@ -245,7 +245,7 @@ console.log(updatedValues)
                 alignItems={"center"}
               >
                 <Typography variant="body1" paragraph>
-                  <strong>Date Lost:</strong> {formattedDate}
+                  <strong>Found Date :</strong> {formattedDate}
                 </Typography>
                 <Box display={"flex"} alignItems={"center"}>
                   <Box sx={{ fontSize: 15, mr: 1 }}>

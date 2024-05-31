@@ -59,7 +59,7 @@ const MyFoundItemCard = ({ foundItem }: { foundItem: any }) => {
   console.log(foundItem);
   
 
-  const date = new Date(foundItem.createdAt);
+  const date = new Date(foundItem?.foundDate);
   const formattedDate = date.toLocaleDateString();
   return (
     <Box sx={{ width: "100%", position: "relative", margin: "0 auto" }}>
@@ -68,7 +68,7 @@ const MyFoundItemCard = ({ foundItem }: { foundItem: any }) => {
           <CardMedia
             sx={{ height: 140 }}
             image={foundItem?.itemImg}
-            title="lost item image"
+            title="Found item image"
           />
           <Box
             sx={{
@@ -137,7 +137,7 @@ const MyFoundItemCard = ({ foundItem }: { foundItem: any }) => {
           <Box display={"flex"} justifyContent={"space-between"}>
             <Typography variant="body2" color="text.secondary">
               <Box display="flex" alignItems="center">
-                <Typography fontWeight={600}>Lost date:&nbsp;</Typography>
+                <Typography fontWeight={600}>Found date:&nbsp;</Typography>
                 <Typography>{formattedDate}</Typography>
               </Box>
             </Typography>
