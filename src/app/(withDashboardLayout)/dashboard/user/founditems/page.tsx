@@ -5,21 +5,20 @@ import { getUserInfo } from '@/app/services/auth.services'
 import { useGetAllFoundItemsQuery } from '@/redux/api/foundItemApi'
 import FoundItemModal from './components/FoundItemModal'
 import FoundItemCard from './components/FoundItemCard'
+import MyFoundItemModal from '../profile/components/my-founditems/components/MyFoundItemModal'
 
 const LostItems = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const {data:foundItems, isLoading} = useGetAllFoundItemsQuery({})
   const user = getUserInfo()
-if(!isLoading){
-  console.log({foundItems},{user})
-}
+
   return (
     <>
       <Button
         variant="contained"
         size={"large"}
         sx={{
-          bgcolor: "#EF6F6C",
+          bgcolor: "#56E39F",
           "&:hover": {
             bgcolor: "#465775",
           },
@@ -28,7 +27,7 @@ if(!isLoading){
       >
         Upload A Found Item
       </Button>
-      <FoundItemModal open={isModalOpen} setOpen={setIsModalOpen} />
+      <MyFoundItemModal open={isModalOpen} setOpen={setIsModalOpen} />
       <Stack justifyContent="center" alignItems="center" spacing={2} sx={{ width: "100%" }}>
         <Box>
       

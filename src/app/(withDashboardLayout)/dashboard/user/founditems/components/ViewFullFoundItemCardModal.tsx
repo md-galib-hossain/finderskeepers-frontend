@@ -19,10 +19,11 @@ import FKFileUploader from "@/components/Forms/FKFileUploader";
 import uploadToImgBB from "@/utils/uploadToImgBB";
 import { FieldValues } from "react-hook-form";
 import { useGetAllCategoriesQuery } from "@/redux/api/categoryApi";
-import { useUpdateLostItemMutation } from "@/redux/api/lostItemApi";
 import { toast } from "sonner";
 import FKTextArea from "@/components/Forms/FKTextArea";
 import EditIcon from '@mui/icons-material/Edit';
+import { useUpdateFoundItemMutation } from "@/redux/api/foundItemApi";
+import modifyUpdateFormData from "@/utils/modifyUpdateFormData";
 export type TOpenProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,29 +33,30 @@ export type TOpenProps = {
 const ViewFullCardModal = ({ foundItem, open, setOpen }: TOpenProps) => {
   const [editable, setEditable] = useState(false);
   const handleClose = () => setOpen(false);
-  const [updateLostItem, { isLoading: updating }] = useUpdateLostItemMutation();
+  const [updateFoundItem, { isLoading: updating }] = useUpdateFoundItemMutation();
   const date = new Date(foundItem.createdAt);
   const formattedDate = date.toLocaleDateString();
 
   const { data: categories, isLoading } = useGetAllCategoriesQuery({});
 
   const handleFormSubmit = async (values: FieldValues) => {
-    if (values.file) {
-      const itemImg = await uploadToImgBB(values.file);
-      delete values.file;
-      values.itemImg = itemImg;
-    }else{
-      values.itemImg = foundItem?.itemImg
-      delete values.file;
+    // if (values.file) {
+    //   const itemImg = await uploadToImgBB(values.file);
+    //   delete values.file;
+    //   values.itemImg = itemImg;
+    // }else{
+    //   values.itemImg = foundItem?.itemImg
+    //   delete values.file;
 
-    }
-    console.log(values.file);
-    console.log(values.itemImg);
-    console.log(values);
-
+    // }
+    // console.log(values.file);
+    // console.log(values.itemImg);
+    // console.log(values);
+const updatedValues = await modifyUpdateFormData(values,foundItem)
+console.log(updatedValues)
     try {
-      values.id = foundItem?.id
-      const res = await updateLostItem(values).unwrap();
+      updatedValues.id = foundItem?.id
+      const res = await updateFoundItem(updatedValues).unwrap();
       console.log(res);
       if (res?.id) {
         toast.success("Lost Item updated successfully!");
@@ -214,9 +216,9 @@ const ViewFullCardModal = ({ foundItem, open, setOpen }: TOpenProps) => {
                   component="h2"
                   gutterBottom
                 >
-                  {foundItem.name}
+                  {foundItem?.name}
                 </Typography>
-                {foundItem.lostItemStatus === "NOTFOUND" ? (
+                {foundItem?.foundItemStatus === "NOTFOUND" ? (
                   <Chip
                     size="small"
                     sx={{ borderColor: "#EF6F6C", color: "#EF6F6C" }}
@@ -232,10 +234,10 @@ const ViewFullCardModal = ({ foundItem, open, setOpen }: TOpenProps) => {
                 )}
               </Box>
               <Typography variant="body2" color="text.secondary" gutterBottom>
-                {foundItem.category.name}
+                {foundItem?.category?.name}
               </Typography>
               <Typography variant="body1" paragraph>
-                <strong>Description:</strong> {foundItem.description}
+                <strong>Description:</strong> {foundItem?.description}
               </Typography>
               <Box
                 display={"flex"}
@@ -249,18 +251,18 @@ const ViewFullCardModal = ({ foundItem, open, setOpen }: TOpenProps) => {
                   <Box sx={{ fontSize: 15, mr: 1 }}>
                     <RoomIcon fontSize="inherit" />
                   </Box>
-                  <Typography fontWeight={600}>{foundItem.location}</Typography>
+                  <Typography fontWeight={600}>{foundItem?.location}</Typography>
                 </Box>
               </Box>
               <Box display={"flex"} alignItems={"center"}>
                 <Box sx={{ fontSize: 20, mr: 1 }}>
                   <PermContactCalendarIcon fontSize="inherit" />
                 </Box>
-                <Typography>{foundItem.contactNo}</Typography>
+                <Typography>{foundItem?.contactNo}</Typography>
               </Box>
             </>
           )}
-          {!editable && foundItem.lostItemStatus === "NOTFOUND" &&
+          {!editable && foundItem?.foundItemStatus === "NOTFOUND" &&
          
 <Box mt={2} display={"flex"} justifyContent={"end"}>
               <Button
@@ -270,9 +272,9 @@ const ViewFullCardModal = ({ foundItem, open, setOpen }: TOpenProps) => {
                 onClick={() => setEditable(!editable)}
                 sx={{
                   
-                    bgcolor: "#EF6F6C",
+                    bgcolor: "#56E39F",
                     "&:hover": {
-                      bgcolor: "#465775",
+                      bgcolor: "#56E39F",
                     },
                 
                 }}

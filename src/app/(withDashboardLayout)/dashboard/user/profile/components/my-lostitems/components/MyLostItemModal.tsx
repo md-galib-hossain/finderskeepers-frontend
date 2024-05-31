@@ -1,4 +1,5 @@
 import FKModal from "@/components/FKModal/FKModal";
+import FKDatePicker from "@/components/Forms/FKDatePicker";
 import FKFileUploader from "@/components/Forms/FKFileUploader";
 import FKForm from "@/components/Forms/FKForm";
 import FKInput from "@/components/Forms/FKInput";
@@ -6,6 +7,7 @@ import FKSelectField from "@/components/Forms/FKSelectField";
 import FKTextArea from "@/components/Forms/FKTextArea";
 import { useGetAllCategoriesQuery } from "@/redux/api/categoryApi";
 import { useCreateLostItemMutation } from "@/redux/api/lostItemApi";
+import { getUserFromLocalStorage } from "@/utils/local-storage";
 import uploadToImgBB from "@/utils/uploadToImgBB";
 import { Box, Button, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
@@ -21,10 +23,12 @@ const MyLostItemModal = ({ open, setOpen }: TOpenProps) => {
   const { data: categories, isLoading } = useGetAllCategoriesQuery({});
   
   const handleFormSubmit = async (values: FieldValues) => {
+    const user =await getUserFromLocalStorage()
     const itemImg = await uploadToImgBB(values.file);
     delete values.file;
     values.itemImg = itemImg;
-    
+    values.lostDate = new Date(values.lostDate).toISOString();
+    values.userId = user?.id
     console.log(values);
     try {
       const res = await createLostItem(values).unwrap();
@@ -54,11 +58,14 @@ const MyLostItemModal = ({ open, setOpen }: TOpenProps) => {
                      label="Details about Item"
                     />
           </Grid>
-          <Grid item xs={12} md={5}>
+          <Grid item xs={12} md={4}>
             <FKInput fullWidth={true} name="contactNo" label="Contact No." />
           </Grid>
           <Grid item xs={12} md={4}>
             <FKInput fullWidth={true} name="location" label="Location" />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <FKDatePicker  fullWidth={true} name="lostDate" label="Lost date" />
           </Grid>
           <Grid item xs={12} md={3}>
             <Box sx={{ width : "100%"}}>

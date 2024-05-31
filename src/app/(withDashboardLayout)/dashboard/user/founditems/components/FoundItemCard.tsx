@@ -61,6 +61,7 @@ const FoundItemCard = ({ foundItem, user }: { foundItem: any; user: any }) => {
   const date = new Date(foundItem.createdAt);
   const formattedDate = date.toLocaleDateString();
  
+  console.log(foundItem)
   return (
     <Box sx={{ width: "100%", position: "relative", margin: "0 auto" }}>
       <Card sx={{ width: "100%" }}>
@@ -70,7 +71,7 @@ const FoundItemCard = ({ foundItem, user }: { foundItem: any; user: any }) => {
             image={foundItem?.itemImg}
             title="Found item image"
           />
-          <Box
+          {/* <Box
             sx={{
               position: "absolute",
               top: 2,
@@ -88,7 +89,7 @@ const FoundItemCard = ({ foundItem, user }: { foundItem: any; user: any }) => {
             >
               <GridDeleteIcon sx={{ color: "red" }} />
             </IconButton>
-          </Box>
+          </Box> */}
         </Box>
         <CardContent>
           <ViewFullCardModal

@@ -79,13 +79,13 @@ const MyLostItemCard = ({ lostItem }: { lostItem: any }) => {
               borderRadius: "50%",
             }}
           >
-            <IconButton
+            {/* <IconButton
               disabled={deleting}
               onClick={() => handleDelete(lostItem.id)}
               aria-label="delete"
             >
               <GridDeleteIcon sx={{ color: "red" }} />
-            </IconButton>
+            </IconButton> */}
           </Box>
         </Box>
         <CardContent>

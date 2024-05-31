@@ -81,13 +81,13 @@ const MyFoundItemCard = ({ foundItem }: { foundItem: any }) => {
               borderRadius: "50%",
             }}
           >
-            <IconButton
+            {/* <IconButton
               disabled={deleting}
               onClick={() => handleDelete(foundItem.id)}
               aria-label="delete"
             >
               <GridDeleteIcon sx={{ color: "red" }} />
-            </IconButton>
+            </IconButton> */}
           </Box>
         </Box>
         <CardContent>

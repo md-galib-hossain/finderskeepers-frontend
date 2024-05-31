@@ -1,4 +1,5 @@
 import FKModal from "@/components/FKModal/FKModal";
+import FKDatePicker from "@/components/Forms/FKDatePicker";
 import FKFileUploader from "@/components/Forms/FKFileUploader";
 import FKForm from "@/components/Forms/FKForm";
 import FKInput from "@/components/Forms/FKInput";
@@ -23,7 +24,8 @@ const MyFoundItemModal = ({ open, setOpen }: TOpenProps) => {
     const itemImg = await uploadToImgBB(values.file);
     delete values.file;
     values.itemImg = itemImg;
-    
+    values.foundDate = new Date(values.foundDate).toISOString();
+
     console.log(values);
     try {
       const res = await createFoundItem(values).unwrap();
@@ -38,7 +40,7 @@ const MyFoundItemModal = ({ open, setOpen }: TOpenProps) => {
   };
 
   return (
-    <FKModal open={open} setOpen={setOpen} title="Add a lost item">
+    <FKModal open={open} setOpen={setOpen} title="Add a found item">
       <FKForm onSubmit={handleFormSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
@@ -49,14 +51,17 @@ const MyFoundItemModal = ({ open, setOpen }: TOpenProps) => {
           <FKSelectField fullWidth={true} sx={{ width: "100%" }} items={categories} name="categoryId" label="Category" />
         </Grid>
          }
-          <Grid item xs={12}>
+          <Grid item xs={12} md={12}>
             <FKInput fullWidth={true} name="description" label="Details about Item" />
           </Grid>
-          <Grid item xs={12} md={5}>
+          <Grid item xs={12} md={4}>
             <FKInput fullWidth={true} name="contactNo" label="Contact No." />
           </Grid>
           <Grid item xs={12} md={4}>
             <FKInput fullWidth={true} name="location" label="Location" />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <FKDatePicker  fullWidth={true} name="foundDate" label="Found date" />
           </Grid>
           <Grid item xs={12} md={3}>
             <Box sx={{ width : "100%"}}>
@@ -64,6 +69,7 @@ const MyFoundItemModal = ({ open, setOpen }: TOpenProps) => {
             </Box>
           </Grid>
         </Grid>
+        <Box display={"flex"} justifyContent={"end"}>
         <Button 
           disabled={creating} 
           sx={{ mt: 4, bgcolor: "#56E39F", "&:hover": { bgcolor: "#465775" } }} 
@@ -71,6 +77,8 @@ const MyFoundItemModal = ({ open, setOpen }: TOpenProps) => {
         >
           Add Item
         </Button>
+          </Box>
+
       </FKForm>
     </FKModal>
   );

@@ -2,8 +2,8 @@
 import { Box, Button, Grid, Stack, Typography } from '@mui/material'
 import { useState } from 'react'
 import MyLostItemCard from './components/MyLostItemCard'
-import MyLostItemModal from './components/MyLostItemModal'
 import { useGetMyAllLostItemsQuery } from '@/redux/api/lostItemApi'
+import MyLostItemModal from './components/MyLostItemModal'
 
 const UserLostItems = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

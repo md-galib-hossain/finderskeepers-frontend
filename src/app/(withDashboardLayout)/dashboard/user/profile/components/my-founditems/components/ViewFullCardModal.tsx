@@ -23,6 +23,7 @@ import { toast } from "sonner";
 import FKTextArea from "@/components/Forms/FKTextArea";
 import EditIcon from '@mui/icons-material/Edit';
 import { useUpdateFoundItemMutation } from "@/redux/api/foundItemApi";
+import modifyUpdateFormData from "@/utils/modifyUpdateFormData";
 export type TOpenProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -39,22 +40,22 @@ const ViewFullCardModal = ({ foundItem, open, setOpen }: TOpenProps) => {
   const { data: categories, isLoading } = useGetAllCategoriesQuery({});
 
   const handleFormSubmit = async (values: FieldValues) => {
-    if (values.file) {
-      const itemImg = await uploadToImgBB(values.file);
-      delete values.file;
-      values.itemImg = itemImg;
-    }else{
-      values.itemImg = foundItem?.itemImg
-      delete values.file;
+    // if (values.file) {
+    //   const itemImg = await uploadToImgBB(values.file);
+    //   delete values.file;
+    //   values.itemImg = itemImg;
+    // }else{
+    //   values.itemImg = foundItem?.itemImg
+    //   delete values.file;
 
-    }
-    console.log(values.file);
-    console.log(values.itemImg);
-    console.log(values);
-
+    // }
+    // console.log(values.file);
+    // console.log(values.itemImg);
+    // console.log(values);
+const updatedData = await modifyUpdateFormData(values,foundItem)
     try {
-      values.id = foundItem?.id
-      const res = await updateFoundItem(values).unwrap();
+      updatedData.id = foundItem?.id
+      const res = await updateFoundItem(updatedData).unwrap();
       console.log(res);
       if (res?.id) {
         toast.success("Found Item updated successfully!");
@@ -270,9 +271,9 @@ const ViewFullCardModal = ({ foundItem, open, setOpen }: TOpenProps) => {
                 onClick={() => setEditable(!editable)}
                 sx={{
                   
-                    bgcolor: "#EF6F6C",
+                    bgcolor: "#56E39F",
                     "&:hover": {
-                      bgcolor: "#465775",
+                      bgcolor: "#56E39F",
                     },
                 
                 }}
