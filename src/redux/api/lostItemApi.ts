@@ -1,3 +1,4 @@
+import { TMeta } from "@/types";
 import { tagTypes } from "../tag-Types";
 import { baseApi } from "./baseApi";
 
@@ -30,6 +31,7 @@ export const lostItemApi = baseApi.injectEndpoints({
         url: "/my-lostitems",
         method: "GET",
       }),
+   
       providesTags: [tagTypes.user, tagTypes.lostItem],
     }),
     softDeleteMyLostItem: build.mutation({
@@ -55,11 +57,19 @@ export const lostItemApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.lostItem, tagTypes.user],
     }),
     getAllLostItems: build.query({
-      query: (arg: Record<string,any>) => ({
+      query: (arg: Record<string,any>) => {
+        
+        return {
         url: "/lost-items",
         method: "GET",
         params : arg
-      }),
+      }},
+      transformResponse: (response: any, meta: TMeta) => {
+        return {
+          lostItems: response,
+          meta,
+        };
+      },
       providesTags: [tagTypes.user, tagTypes.lostItem],
     }),
   }),

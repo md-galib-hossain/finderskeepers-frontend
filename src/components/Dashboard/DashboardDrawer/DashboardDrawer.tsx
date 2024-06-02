@@ -10,9 +10,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import SideBar from "../SideBar/SideBar";
 import { Avatar, Badge, Grid, Stack } from "@mui/material";
-import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import AccountMenu from "../AccountMenu/AccountMenu";
+import { useGetMyProfileQuery } from "@/redux/api/myProfile";
 
 const drawerWidth = 240;
 
@@ -24,7 +24,7 @@ export default function DashboardDrawer({
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
 
-  const {data,isLoading} = useGetSingleUserQuery({})
+  const {data,isLoading} = useGetMyProfileQuery({})
   const handleDrawerClose = () => {
     setIsClosing(true);
     setMobileOpen(false);
@@ -83,7 +83,7 @@ export default function DashboardDrawer({
 
           <Typography variant="body2" noWrap component="div">
             Hi, {
-              isLoading ? null : data?.user?.name
+              isLoading ? null : data?.name
             }
           </Typography>
           <Typography variant="body2" noWrap component="div">
@@ -91,13 +91,13 @@ export default function DashboardDrawer({
           </Typography>
             </Box>
           <Stack direction="row" gap={3}>
-          <Badge badgeContent={1} color="primary">
+          {/* <Badge badgeContent={1} color="primary">
               <IconButton sx={{ background: "#ffffff" }}>
                 <NotificationsNoneIcon color="action" />
               </IconButton>
-            </Badge>
+            </Badge> */}
               <Stack direction="row">
-              <Avatar alt={data?.user?.name} src={data?.user?.profilePhoto} />
+              <Avatar alt={data?.name} src={data?.profilePhoto} />
             <AccountMenu/>
               </Stack>
            

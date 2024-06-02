@@ -1,3 +1,4 @@
+import { TMeta } from "@/types";
 import { tagTypes } from "../tag-Types";
 import { baseApi } from "./baseApi";
 
@@ -20,6 +21,12 @@ export const foundItemApi = baseApi.injectEndpoints({
         method: "GET",
         params: args
       }),
+      transformResponse: (response: any, meta: TMeta) => {
+        return {
+          foundItems: response,
+          meta,
+        };
+      },
       providesTags: [tagTypes.user, tagTypes.foundItem],
     }),
 

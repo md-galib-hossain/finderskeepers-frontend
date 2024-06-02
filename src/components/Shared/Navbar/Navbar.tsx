@@ -1,12 +1,13 @@
 "use client";
+import { getUserFromLocalStorage } from "@/utils/local-storage";
 import { Box, Container, Stack, Typography } from "@mui/material";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-const Navbar = () => {
+const Navbar =() => {
   // lazy loading
   const AuthButton = dynamic(() => import('@/components/Ui/AuthButton/AuthButton'), { ssr: false })
-
-
+  const user = getUserFromLocalStorage()
+console.log(user)
   return (
     <Box sx={{ position: "relative", zIndex: 10 }}>  {/* Added zIndex */}
 
@@ -34,12 +35,12 @@ const Navbar = () => {
           <Typography component={Link} href="/">
             Home{" "}
           </Typography>
-          <Typography component={Link} href="dashboard/">
-            My Profile
-          </Typography>
-          <Typography component={Link} href="/posts">
-            Posts
-          </Typography>
+         {
+          user ?  <Typography component={Link} href="dashboard/">
+          My Profile
+        </Typography> : null
+         }
+          
           <Typography component={Link} href="/about-us">
             About us
           </Typography>

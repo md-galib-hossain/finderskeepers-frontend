@@ -27,7 +27,7 @@ const AdminPage = () => {
       {isLoading || <LostItemVisual lostItems={lostItems} />}  
       </Grid>
       <Grid item xs={12} sm={12} md={6}>
-      {loadingUsers || <UserVisual users={data.users}/>}
+      {loadingUsers || <UserVisual users={data?.users}/>}
  
       </Grid>
       <Grid item xs={12} sm={12} md={6}>

@@ -52,6 +52,12 @@ const Footer = () => {
             <Image src={linkedinIcon} width={30} height={30} alt="linkedin" />
           </Link>
         </Stack>
+        <Typography color="#fff" textAlign={"center"} fontWeight="bold">
+          Contact Us
+        </Typography>
+        <Typography color="#fff" textAlign={"center"} variant="body1" mt={2}>
+          Email: info@finderskeepers.com
+        </Typography>
         <Stack
           direction="row"
           gap={2}

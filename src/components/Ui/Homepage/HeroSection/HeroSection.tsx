@@ -2,6 +2,7 @@ import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import wave from "./../../../../assets/wave.svg";
 import HeroImage from "./HeroImage";
+import Link from "next/link";
 const HeroSection = () => {
   return (<>
   <HeroImage wave={wave}/>
@@ -32,6 +33,7 @@ const HeroSection = () => {
             connection.
           </Typography>
           <Box display="flex" gap={2}>
+            <Link href="/dashboard/user/founditems">
             <Button
               variant="contained"
               size={"large"}
@@ -44,6 +46,9 @@ const HeroSection = () => {
             >
               Report A Found Item
             </Button>
+            </Link>
+            <Link href="/dashboard/user/lostitems">
+        
             <Button
               variant="outlined"
               sx={{
@@ -57,6 +62,7 @@ const HeroSection = () => {
             >
               Report A Lost Item
             </Button>
+            </Link>
           </Box>
         </Box>
       </Box>
