@@ -1,108 +1,175 @@
-'use client';
+"use client";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
+import Image from "next/image";
+import React, { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+// import { userLogin } from "../services/actions/userLogin";
+import { toast } from "sonner";
+import FKForm from "@/components/Forms/FKForm";
+import FKInput from "@/components/Forms/FKInput";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useChangePasswordMutation, useUserLoginMutation } from "@/redux/api/authApi";
+import { getUserInfo, storeUserInfo } from "@/app/services/auth.services";
+import setAccessToken from "@/app/services/actions/setAccessToken";
+import logoutUser from "@/app/services/actions/logoutUser";
 
-
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Button, Grid, Stack, Typography } from '@mui/material';
-import { FieldValues } from 'react-hook-form';
-import { z } from 'zod';
-import KeyIcon from '@mui/icons-material/Key';
-import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
-import logoutUser from '@/app/services/actions/logoutUser';
-import FKInput from '@/components/Forms/FKInput';
-import FKForm from '@/components/Forms/FKForm';
-import { useChangePasswordMutation } from '@/redux/api/authApi';
-type TRes ={
-   message : string
-} | any
-const validationSchema = z.object({
-   oldPassword: z.string().min(6, 'Must be at least 6 characters long'),
-   newPassword: z.string().min(6, 'Must be at least 6 characters long'),
+export const validationSchema = z.object({
+  oldPassword: z.string().min(6,"Must be at least 6 characters"),
+  newPassword: z.string().min(6, "Must be at least 6 characters"),
+  confirmNewPassword: z.string().min(6, "Must be at least 6 characters"),
 });
 
-const ChangePassword = () => {
-   const [changePassword] = useChangePasswordMutation();
-   const router = useRouter();
-   const onSubmit = async (values: FieldValues) => {
-      try {
-   
-         const res : TRes = await changePassword(values)
-        
-         if (res?.message ) {
-            logoutUser(router);
-            toast.success('Password Changed Successfully');
-         } else {
-            throw new Error('Incorrect Old Password');
-         }
-      } catch (error) {
-         toast.success('Incorrect Old Password');
-         console.log(error);
-      }
-   };
+const LoginPage = () => {
+  const router = useRouter();
+  const [error, setError] = useState("");
+  const [changePassword,{isLoading : changingPass}] = useChangePasswordMutation()
+  const handleChangePassword = async (values: FieldValues) => {
+    if(values.newPassword !== values.confirmNewPassword){
+      setError("Confirm password doesn't match")
+     
+    }
+    else if(values.newPassword === values.confirmNewPassword){
 
-   return (
-      <Box
-         sx={{
-            px: 4,
-            py: 2,
-            maxWidth: 600,
-            width: '100%',
+      try {
+      const {confirmNewPassword,...changePasswordData} = values 
+   const result = await changePassword(changePasswordData)
+   if(result.data.message){
+    toast.success("Password changed")
+    logoutUser(router)
+   }else{
+    setError("Wrong Password!")
+
+   }
+      
+       } catch (err: any) {
+         console.log(err.message);
+       }
+    }
+   
+  };
+  return (
+    <Container>
+      <Stack
+        sx={{
+          height: "100vh",
+          marginTop:4,
+          // justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Box
+          sx={{
+            maxWidth: 400,
+            width: "100%",
             boxShadow: 1,
             borderRadius: 1,
-            mx: 'auto',
-            mt: {
-               xs: 2,
-               md: 5,
-            },
-         }}
-      >
-         <Stack alignItems='center' justifyContent='center'>
-            <Box
-               sx={{
-                  '& svg': {
-                     width: 100,
-                     height: 100,
-                  },
-               }}
-            >
-               <KeyIcon sx={{ color: 'primary.main' }} />
+            p: 4,
+            textAlign: "center",
+          }}
+        >
+          {/* icon and title */}
+          <Stack
+            sx={{
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+          
+            <Box>
+              <Typography variant="h6" fontWeight={600} sx={{ marginTop: 2 }}>
+                Change Password
+              </Typography>
             </Box>
-            <Typography variant='h5' fontWeight={600} sx={{ mb: 2, mt: -1.5 }}>
-               Change password
-            </Typography>
-         </Stack>
-         <FKForm
-            onSubmit={onSubmit}
-            defaultValues={{ oldPassword: '', newPassword: '' }}
-            resolver={zodResolver(validationSchema)}
-         >
-            <Grid>
-               <Grid item xs={12} sm={12} md={6}>
-                  <FKInput
-                     name='oldPassword'
-                     type='password'
-                     label='Old Password'
-                     fullWidth
-                     sx={{ mb: 2 }}
-                  />
-               </Grid>
-               <Grid item xs={12} sm={12} md={6}>
-                  <FKInput
-                     name='newPassword'
-                     type='password'
-                     label='New Password'
-                     fullWidth
-                     sx={{ mb: 2 }}
-                  />
-               </Grid>
-            </Grid>
+          </Stack>
+          {/* error message start */}
+          {error && (
+            <Box>
+              <Typography
+                sx={{
+                  backgroundColor: "red",
+                  padding: "1px",
+                  borderRadius: "2px",
+                  color: "white",
+                  marginTop: "5px",
+                }}
+              >
+                {error}
+              </Typography>
+            </Box>
+          )}
 
-            <Button type='submit' sx={{ width: '100%', my: 2 }}>
-               change Password
-            </Button>
-         </FKForm>
-      </Box>
-   );
+          {/* error message end */}
+
+          {/* */}
+          <Box>
+            <FKForm
+              onSubmit={handleChangePassword}
+              resolver={zodResolver(validationSchema)}
+              defaultValues={{
+                oldPassword: "",
+                newPassword: "",
+                confirmNewPassword: "",
+              }}
+            >
+              {/* parent grid */}
+              <Grid container spacing={2} my={1}>
+                <Grid sx={{width : "100%"}} item md={12} >
+                  <FKInput
+                    name="oldPassword"
+                    label="Old Password"
+                    type="password"
+                    fullWidth={true}
+                  />
+                </Grid>
+                <Grid sx={{width : "100%"}} item md={12}>
+                  <FKInput
+                    name="newPassword"
+                    label="New Password"
+                    type="password"
+                    fullWidth={true}
+                  />
+                </Grid>
+                <Grid sx={{width : "100%"}} item md={12}>
+                  <FKInput
+                    name="confirmNewPassword"
+                    label="Confirm New Password"
+                    type="password"
+                    fullWidth={true}
+                  />
+                </Grid>
+              </Grid>
+             
+              <Button
+                sx={{
+                  margin: "8px 0px",
+                  bgcolor: "#56E39F",
+                  "&:hover": {
+                    bgcolor: "#465775",
+                  },
+                }}
+                fullWidth={true}
+                type="submit"
+              >
+                Change Password
+              </Button>
+             
+            </FKForm>
+          </Box>
+        </Box>
+      </Stack>
+    </Container>
+  );
 };
 
-export default ChangePassword;
+export default LoginPage;

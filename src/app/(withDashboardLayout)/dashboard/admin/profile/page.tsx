@@ -1,34 +1,16 @@
-"use client";
-
-import React, { useState } from 'react';
-import SubNavbar from "./components/SubNavbar";
-import UserFoundItems from './components/my-founditems/page';
-import UserLostItems from './components/my-lostitems/page';
-import UserClaims from './components/claims/page';
+"use client"
 import { useGetMyProfileQuery } from '@/redux/api/myProfile';
-import { Avatar, Box, Grid, Typography, Button } from '@mui/material';
-import EditProfileModal from './components/EditProfileModal';
+import { Avatar, Box, Button, Grid, Typography } from '@mui/material';
+import React, { useState } from 'react'
+import EditProfileModal from '../../user/profile/components/EditProfileModal';
 
-const UserProfile = () => {
-  const [view, setView] = useState('lostItems');
-  const { data: user, isLoading } = useGetMyProfileQuery({});
-  const [open, setOpen] = useState(false);
-
-  const renderView = () => {
-    switch (view) {
-      case 'foundItems':
-        return <UserFoundItems />;
-      case 'claims':
-        return <UserClaims />;
-      case 'lostItems':
-      default:
-        return <UserLostItems />;
-    }
-  };
+const AdminProfilePage = () => {
+    const { data: user, isLoading } = useGetMyProfileQuery({});
+    const [open, setOpen] = useState(false);
 
   return (
     <>
-      {user && (
+{!isLoading && user && (
         <Box mb={6}>
           <Box display={"flex"} alignItems={"center"}>
             <Box>
@@ -96,12 +78,11 @@ const UserProfile = () => {
         </Box>
       )}
 
-      <SubNavbar activeButton={view} setView={setView} />
-      {renderView()}
 
-      <EditProfileModal open={open} setOpen={setOpen} user={user} />
+<EditProfileModal open={open} setOpen={setOpen} user={user} />
+
     </>
-  );
-};
+  )
+}
 
-export default UserProfile;
+export default AdminProfilePage

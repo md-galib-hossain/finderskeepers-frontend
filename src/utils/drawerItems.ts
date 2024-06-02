@@ -9,9 +9,10 @@ import ReviewsIcon from '@mui/icons-material/Reviews';
 import TryIcon from '@mui/icons-material/Try';
 import PersonIcon from '@mui/icons-material/Person';
 import KeyIcon from '@mui/icons-material/Key';
-import BookOnlineIcon from '@mui/icons-material/BookOnline';
-import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import ExploreIcon from '@mui/icons-material/Explore';import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import ExploreOffIcon from '@mui/icons-material/ExploreOff';
+import FlakyIcon from '@mui/icons-material/Flaky';
 export const drawerItems = (role : TUserRole) : TDrawerItem[]=>{
 
 
@@ -38,10 +39,10 @@ switch(role){
             icon : DashboardIcon,
         },
         {
-            title : "Manage Users",
-            path: `${role}/manage-users`,
-            icon : GroupIcon,
-        },)
+         title: 'Users',
+         path: `${role}/users`,
+         icon: TryIcon,
+      },)
         break;
         
         case USER_ROLE.ADMIN:
@@ -55,21 +56,6 @@ switch(role){
                   title: 'Users',
                   path: `${role}/users`,
                   icon: TryIcon,
-               },
-               {
-                  title: 'Lost Items',
-                  path: `${role}/lost-items`,
-                  icon: MedicalInformationIcon,
-               },
-               {
-                  title: 'Found Items',
-                  path: `${role}/found-items`,
-                  icon: CalendarMonthIcon,
-               },
-               {
-                  title: 'Claims',
-                  path: `${role}/claims`,
-                  icon: BookOnlineIcon,
                },
                {
                   title: 'Item Categories',
@@ -89,12 +75,12 @@ switch(role){
                {
                   title: 'Lost Items',
                   path: `${role}/lostitems`,
-                  icon: CalendarMonthIcon,
+                  icon: ExploreOffIcon,
                },
                {
                   title: 'Found Items',
                   path: `${role}/founditems`,
-                  icon: BookOnlineIcon,
+                  icon: ExploreIcon,
                },
              
                

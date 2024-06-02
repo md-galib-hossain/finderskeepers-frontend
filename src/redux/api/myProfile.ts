@@ -18,12 +18,11 @@ const profileApi = baseApi.injectEndpoints({
             query : (data) => {
                 return {
                     url : '/my-profile',
-                    method : 'PATCH',
-                    data,
-                    contentType : 'multipart/form-data'
+                    method: "PATCH",
+                    data: data,
                 }
             },
-            invalidatesTags : [tagTypes.user]
+            invalidatesTags : [tagTypes.user,tagTypes.lostItem,tagTypes.foundItem,tagTypes.userProfile,tagTypes.claim]
         })
     })
 

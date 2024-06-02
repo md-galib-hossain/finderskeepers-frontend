@@ -1,7 +1,7 @@
 
 const PatientPage = () => {
   return (
-    <div>Patient dashboard page</div>
+    <div>User Dashboard page</div>
   )
 }
 

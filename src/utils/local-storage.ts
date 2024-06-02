@@ -1,3 +1,4 @@
+
 import { decodedToken } from "./jwt";
 
 export const setToLocalStorage = (key: string, token: string) => {
@@ -29,3 +30,4 @@ export const removeFromLocalStorage = (key: string) => {
   }
   return localStorage.removeItem(key);
 };
+

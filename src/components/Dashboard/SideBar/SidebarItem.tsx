@@ -16,8 +16,8 @@ const SidebarItem = ({ item, index }: { item: TDrawerItem; index: number }) => {
   return (
     <Link href={linkPath}>
       <ListItem disablePadding sx={{
-        ...(pathName === linkPath ? {borderRight : "3px solid #1586FD", "& svg" : {
-            color: "#1586FD"
+        ...(pathName === linkPath ? {borderRight : "3px solid #465775", "& svg" : {
+            color: "#465775"
         } } : {}),
         mb:1
       }}>

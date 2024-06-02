@@ -2,6 +2,7 @@ import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { removeFromLocalStorage } from "./utils/local-storage";
 
 type TRole = keyof typeof roleBasedPrivateRoutes;
 
@@ -22,7 +23,9 @@ export function middleware(request: NextRequest) {
   console.log(request.nextUrl);
   const { pathname } = request.nextUrl;
   const accessToken = cookies().get("accessToken")?.value;
+  console.log(accessToken)
   if (!accessToken) {
+     
     if (AuthRoutes.includes(pathname)) {
       return NextResponse.next();
     } else {
