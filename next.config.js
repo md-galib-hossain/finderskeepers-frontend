@@ -11,6 +11,9 @@ const nextConfig = {
     rules: {
         "react/no-unescaped-entities": "off",
       },
+      eslint: {
+        ignoreDuringBuilds: false,
+      },
 }
 
 module.exports = nextConfig
