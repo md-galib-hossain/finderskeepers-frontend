@@ -5,26 +5,20 @@ import {
   Container,
   Grid,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
-import Image from "next/image";
 import React, { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-// import { userLogin } from "../services/actions/userLogin";
+import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import FKForm from "@/components/Forms/FKForm";
 import FKInput from "@/components/Forms/FKInput";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useChangePasswordMutation, useUserLoginMutation } from "@/redux/api/authApi";
-import { getUserInfo, storeUserInfo } from "@/app/services/auth.services";
-import setAccessToken from "@/app/services/actions/setAccessToken";
+import { useChangePasswordMutation } from "@/redux/api/authApi";
 import logoutUser from "@/app/services/actions/logoutUser";
 
-export const validationSchema = z.object({
+ const validationSchema = z.object({
   oldPassword: z.string().min(6,"Must be at least 6 characters"),
   newPassword: z.string().min(6, "Must be at least 6 characters"),
   confirmNewPassword: z.string().min(6, "Must be at least 6 characters"),
@@ -109,9 +103,7 @@ const LoginPage = () => {
             </Box>
           )}
 
-          {/* error message end */}
-
-          {/* */}
+          {/* error message end */}       
           <Box>
             <FKForm
               onSubmit={handleChangePassword}

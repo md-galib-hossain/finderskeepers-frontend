@@ -23,7 +23,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useUserLoginMutation } from "@/redux/api/authApi";
 import setAccessToken from "../services/actions/setAccessToken";
 
-export const validationSchema = z.object({
+ const validationSchema = z.object({
   email: z.string().email("Please enter a valid email address!"),
   password: z.string().min(6, "Must be at least 6 characters"),
 });
