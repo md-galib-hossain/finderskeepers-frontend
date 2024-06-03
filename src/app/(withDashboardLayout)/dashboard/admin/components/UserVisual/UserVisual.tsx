@@ -5,7 +5,7 @@ const UserVisual = ({ users }: { users: any[] }) => {
     console.log(users);
 
     // Initialize userStatusCounts with zero counts for "ACTIVE" and "INACTIVE"
-    const userStatusCounts = users?.reduce((acc: any, user: any) => {
+    const userStatusCounts = users.length > 0 && users?.reduce((acc: any, user: any) => {
         acc[user.status] = (acc[user.status] || 0) + 1;
         return acc;
     }, { 'ACTIVE': 0, 'INACTIVE': 0 });

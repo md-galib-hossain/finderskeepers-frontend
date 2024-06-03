@@ -163,7 +163,7 @@ const MyLostItemCard = ({ lostItem }: { lostItem: any }) => {
             }}
             onClick={() => setIsModalOpen(!isModalOpen)}
           >
-            View Full Post
+            View Post
           </Button>
           { lostItem?.lostItemStatus === "NOTFOUND" && (
             <Button
@@ -178,7 +178,7 @@ const MyLostItemCard = ({ lostItem }: { lostItem: any }) => {
               }}
               onClick={() => handleMarkAsFound(lostItem.id)}
             >
-              Mark as found
+              mark found
             </Button>
           )}
         </CardActions>

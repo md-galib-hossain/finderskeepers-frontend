@@ -167,7 +167,7 @@ const MyClaimItemCard = ({ claimItem }: { claimItem: any }) => {
             }}
             onClick={() => setIsModalOpen(!isModalOpen)}
           >
-            View Full Post
+            View Post
           </Button>
          
          

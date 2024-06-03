@@ -1,18 +1,39 @@
 "use client"
-import DashboardDrawer from "@/components/Dashboard/DashboardDrawer/DashboardDrawer"
-import React from "react"
-import { isLoggedIn } from "../services/auth.services"
-import { useRouter } from "next/navigation"
+import DashboardDrawer from "@/components/Dashboard/DashboardDrawer/DashboardDrawer";
+import React from "react";
+import { isLoggedIn } from "../services/auth.services";
+import { useRouter, usePathname } from "next/navigation";
 
-const DashboardLayout = ({children} : {children : React.ReactNode}) => {
-  const router = useRouter()
-  if(!isLoggedIn()){
+const roleBasedPrivateRoutes = {
+  USER: [/^\/dashboard\/user/, /^\/dashboard\/change-password/, /^\/dashboard$/],
+  ADMIN: [/^\/dashboard\/admin/, /^\/dashboard\/change-password/, /^\/dashboard$/],
+  SUPER_ADMIN: [/^\/dashboard\/super-admin/],
+} as const;
 
-    return router.push("/login")
+
+
+type Role = keyof typeof roleBasedPrivateRoutes;
+
+const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const userInfo = isLoggedIn();
+
+  if (!userInfo) {
+    router.push("/login");
+    return null;
   }
-  return (
-    <DashboardDrawer>{children}</DashboardDrawer>
-  )
-}
 
-export default DashboardLayout
+  const role = userInfo.role.toUpperCase() as Role;
+
+  const isAuthorized = roleBasedPrivateRoutes[role]?.some((regex: RegExp) => regex.test(pathname));
+
+  if (!isAuthorized) {
+    router.push("/unauthorized"); // redirect to unauthorized page
+    return null;
+  }
+
+  return <DashboardDrawer>{children}</DashboardDrawer>;
+};
+
+export default DashboardLayout;

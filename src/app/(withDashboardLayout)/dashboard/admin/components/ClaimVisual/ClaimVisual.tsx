@@ -5,7 +5,7 @@ const ClaimVisual = ({ claims }: any) => {
     console.log(claims)
 
     // Initialize claimStatusCounts with zero counts for "PENDING", "APPROVED", and "REJECTED"
-    const claimStatusCounts = claims?.reduce((acc: any, claim: any) => {
+    const claimStatusCounts = claims.length > 0 && claims?.reduce((acc: any, claim: any) => {
         acc[claim.status] = (acc[claim.status] || 0) + 1;
         return acc;
     }, { 'PENDING': 0, 'APPROVED': 0, 'REJECTED': 0 });

@@ -7,29 +7,25 @@ import {
   setToLocalStorage,
 } from "@/utils/local-storage";
 
-export const storeUserInfo = (accessToken:string) => {
+export const storeUserInfo = (accessToken: string) => {
   return setToLocalStorage(authKey, accessToken);
 };
 
 export const getUserInfo = () => {
-  const authToken : string | any = getFromLocalStorage(authKey);
+  const authToken: string | any = getFromLocalStorage(authKey);
   
   if (authToken && authToken !== 'undefined') {
     const decodedData: any = decodedToken(authToken);
     return { ...decodedData, role: decodedData?.role?.toLowerCase() };
-  }else{
-    return ""
-
+  } else {
+    return null;
   }
 };
 
 export const isLoggedIn = () => {
-  const authToken: any = getFromLocalStorage(authKey);
-  if (authToken) {
-    return !!authToken;
-  }
+  const userInfo = getUserInfo();
+  return userInfo ? userInfo : null;
 };
-
 
 export const removeUser = () => {
   return removeFromLocalStorage(authKey);
@@ -37,9 +33,9 @@ export const removeUser = () => {
 
 export const getNewAccessToken = async () => {
   return await axiosInstance({
-     url: 'http://localhost:5000/api/refresh-token',
-     method: 'POST',
-     headers: { 'Content-Type': 'application/json' },
-     withCredentials: true,
+    url: 'https://finderskeepers-backend.onrender.com/api/refresh-token',
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    withCredentials: true,
   });
 };

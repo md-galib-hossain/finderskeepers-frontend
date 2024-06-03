@@ -165,7 +165,7 @@ const LostItemCard = ({ lostItem,user }: { lostItem: any,user:any }) => {
             }}
             onClick={() => setIsModalOpen(!isModalOpen)}
           >
-            View Full Post
+            View Post
           </Button>
           { lostItem?.lostItemStatus === "NOTFOUND" && lostItem?.user?.id === user.id && (
             <Button
@@ -180,7 +180,7 @@ const LostItemCard = ({ lostItem,user }: { lostItem: any,user:any }) => {
               }}
               onClick={() => handleMarkAsFound(lostItem.id)}
             >
-              Mark as found
+              mark found
             </Button>
           )}
         </CardActions>

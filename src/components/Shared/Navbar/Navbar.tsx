@@ -1,13 +1,21 @@
 "use client";
+import { getUserInfo } from "@/app/services/auth.services";
 import { getUserFromLocalStorage } from "@/utils/local-storage";
 import { Box, Container, Stack, Typography } from "@mui/material";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 const Navbar =() => {
   // lazy loading
   const AuthButton = dynamic(() => import('@/components/Ui/AuthButton/AuthButton'), { ssr: false })
-  const user = getUserFromLocalStorage()
-console.log(user)
+  const [user, setUser] = useState<{ role?: string } | null>(null);
+
+  useEffect(() => {
+    const userFromStorage = getUserInfo();
+    setUser(userFromStorage);
+  }, []);
+
+
   return (
     <Box sx={{ position: "relative", zIndex: 10 }}>  {/* Added zIndex */}
 
@@ -36,7 +44,7 @@ console.log(user)
             Home{" "}
           </Typography>
          {
-          user ?  <Typography component={Link} href="dashboard/">
+          user ?  <Typography component={Link} href={`dashboard/${user?.role}`}>
           My Profile
         </Typography> : null
          }

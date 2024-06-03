@@ -18,7 +18,7 @@ import { FieldValues } from "react-hook-form";
 
 const validationSchema = z.object({
   name: z.string().min(1, "Name is required"),
-  id: z.string().min(1, "Category is required"),
+  id: z.string().optional(),
 });
 
 const ItemcategoriesPage = () => {
@@ -28,8 +28,10 @@ const ItemcategoriesPage = () => {
   const [updateItemCategory, { isLoading: updating }] = useUpdateItemCategoryMutation();
 
   const handleAddCategory = async (values: FieldValues) => {
+    console.log(values)
     try {
-      await createCategoryItem({ name: values.name });
+      const res = await createCategoryItem({ name: values.name });
+    console.log(res)
       // Optionally, you can refetch categories here after adding a new one
     } catch (error) {
       setError("Couldn't create");
@@ -64,18 +66,20 @@ const ItemcategoriesPage = () => {
       )}
 
       <Grid container spacing={4} mb={4}>
+        {/* add */}
         <Grid item xs={12} md={6}>
           <Box>
             <Typography variant="h6" gutterBottom>
-              Add New Category
+              Add Category
             </Typography>
             <FKForm
               onSubmit={handleAddCategory}
               resolver={zodResolver(validationSchema)}
             >
               <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <FKInput name="name" label="Category Name" fullWidth />
+              
+                <Grid item xs={12} sm={12}>
+                  <FKInput name="name" label="New Category" fullWidth />
                 </Grid>
                 <Grid item xs={12}>
                   <Button
@@ -87,8 +91,9 @@ const ItemcategoriesPage = () => {
                     sx={{
                       bgcolor: "#56E39F",
                       "&:hover": {
-                        bgcolor: "#56E39F",
+                        bgcolor: "#465775",
                       },
+            
                     }}
                   >
                     {creating ? "Creating..." : "Create Category"}
@@ -98,7 +103,7 @@ const ItemcategoriesPage = () => {
             </FKForm>
           </Box>
         </Grid>
-
+{/* update */}
         <Grid item xs={12} md={6}>
           <Box>
             <Typography variant="h6" gutterBottom>

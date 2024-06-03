@@ -168,7 +168,7 @@ const FoundItemCard = ({ foundItem, user }: { foundItem: any; user: any }) => {
             }}
             onClick={() => setIsModalOpen(!isModalOpen)}
           >
-            View Full Post
+            View Post
           </Button>
           {foundItem?.foundItemStatus === "NOTFOUND" &&
             user.id === foundItem?.user?.id && (
@@ -200,7 +200,7 @@ const FoundItemCard = ({ foundItem, user }: { foundItem: any; user: any }) => {
                 }}
                 onClick={() => setIsClaimModalOpen(!isClaimModalOpen)}
               >
-                {foundItem?.claim?.some((claim : any) => claim.userId === user.id) ? "Claim Submitted" : "Claim"}
+                {foundItem?.claim?.some((claim : any) => claim.userId === user.id) ? "Submitted" : "Claim"}
               </Button>
             )}
         </CardActions>

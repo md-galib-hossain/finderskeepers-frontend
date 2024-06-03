@@ -1,4 +1,3 @@
-
 import { decodedToken } from "./jwt";
 
 export const setToLocalStorage = (key: string, token: string) => {
@@ -14,13 +13,17 @@ export const getFromLocalStorage = (key: string) => {
   }
   return localStorage.getItem(key);
 };
+
 export const getUserFromLocalStorage = () => {
+  if (typeof window === "undefined") {
+    return null;
+  }
   const token = localStorage.getItem("accessToken");
 
   if (!token) {
     return null;
   }
-  const user : any = decodedToken(token);
+  const user: any = decodedToken(token);
   return user;
 };
 
@@ -30,4 +33,3 @@ export const removeFromLocalStorage = (key: string) => {
   }
   return localStorage.removeItem(key);
 };
-

@@ -165,7 +165,7 @@ const MyFoundItemCard = ({ foundItem }: { foundItem: any }) => {
             }}
             onClick={() => setIsModalOpen(!isModalOpen)}
           >
-            View Full Post
+            View Post
           </Button>
           { foundItem?.foundItemStatus === "NOTFOUND" && (
             <Button

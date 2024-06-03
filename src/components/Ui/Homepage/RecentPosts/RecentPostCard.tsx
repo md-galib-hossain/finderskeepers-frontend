@@ -147,7 +147,7 @@ const RecentPostCard = ({ lostItem,user }: { lostItem: any,user:any }) => {
             }}
             onClick={() => setIsModalOpen(!isModalOpen)}
           >
-            View Full Post
+            View Post
           </Button>
          
         </CardActions>

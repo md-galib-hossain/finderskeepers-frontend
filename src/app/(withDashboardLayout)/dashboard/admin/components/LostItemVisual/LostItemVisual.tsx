@@ -5,7 +5,7 @@ const LostItemVisual = ({ lostItems }: any) => {
     console.log(lostItems)
 
     // Initialize lostItemStatusCounts with zero counts for "NOTFOUND" and "FOUND"
-    const lostItemStatusCounts = lostItems?.reduce((acc: any, item: any) => {
+    const lostItemStatusCounts = lostItems.length > 0 && lostItems?.reduce((acc: any, item: any) => {
         acc[item.lostItemStatus] = (acc[item.lostItemStatus] || 0) + 1;
         return acc;
     }, { 'NOTFOUND': 0, 'FOUND': 0 });

@@ -172,7 +172,7 @@ import ClaimsOnMyItemModal from "./ClaimsOnMyItemModal.";
               }}
               onClick={() => setIsModalOpen(!isModalOpen)}
             >
-              View Full Post
+              View Post
             </Button>
            
            

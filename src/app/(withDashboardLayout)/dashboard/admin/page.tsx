@@ -21,10 +21,10 @@ const AdminPage = () => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={12} md={6}>
-      {loadingFoundItems || <FoundItemVisual foundItems={foundItems}/>}
+      {loadingFoundItems || <FoundItemVisual foundItems={foundItems?.foundItems}/>}
       </Grid>
       <Grid item xs={12} sm={12} md={6}>
-      {isLoading || <LostItemVisual lostItems={lostItems} />}  
+      {isLoading || <LostItemVisual lostItems={lostItems?.lostItems} />}  
       </Grid>
       <Grid item xs={12} sm={12} md={6}>
       {loadingUsers || <UserVisual users={data?.users}/>}

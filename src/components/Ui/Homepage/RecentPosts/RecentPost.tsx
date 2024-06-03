@@ -8,6 +8,7 @@ import Link from "next/link";
 
 const RecentPost = () => {
   const { data, isLoading } = useGetAllLostItemsQuery({});
+  console.log({data})
   const lostItems = data?.lostItems
   const user = getUserFromLocalStorage();
 
