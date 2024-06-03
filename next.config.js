@@ -8,10 +8,9 @@ const nextConfig = {
             }
         ]
     },
-    reactStrictMode: true, 
-    eslint: { 
-      ignoreDuringBuilds: true, 
-    }, 
+    rules: {
+        "react/no-unescaped-entities": "off",
+      },
 }
 
 module.exports = nextConfig
