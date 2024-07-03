@@ -5,7 +5,7 @@ import { tagTypeList } from '../tag-Types'
 
 export const baseApi = createApi({
   reducerPath: 'api',
-  baseQuery: axiosBaseQuery({ baseUrl: 'https://finderskeepers-backend.onrender.com/api' }),
+  baseQuery: axiosBaseQuery({ baseUrl: 'https://finderskeepers-backend-qu6mz8f8g-mdgalibhossain1s-projects.vercel.app/api' }),
   endpoints: () => ({
    
   
