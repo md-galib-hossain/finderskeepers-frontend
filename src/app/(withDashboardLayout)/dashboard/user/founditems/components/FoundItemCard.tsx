@@ -183,7 +183,7 @@ const FoundItemCard = ({ foundItem, user }: { foundItem: any; user: any }) => {
                 }}
                 onClick={() => handleMarkAsClaimed(foundItem.id)}
               >
-                Mark as Claimed
+                Mark Claimed
               </Button>
             )}
           {foundItem?.foundItemStatus === "NOTFOUND" &&

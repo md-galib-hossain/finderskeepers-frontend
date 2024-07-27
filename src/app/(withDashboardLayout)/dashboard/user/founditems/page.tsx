@@ -11,7 +11,7 @@ const FoundItems = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [queryParams, setQueryParams] = useState({
     page: 1,
-    pageSize: 10,
+    limit: 10,
     location: '',
     category: '',
     searchTerm: ''
@@ -23,7 +23,7 @@ const FoundItems = () => {
   const constructQueryParams = () => {
     const params: { [key: string]: any } = {};
     if (queryParams.page) params.page = queryParams.page;
-    if (queryParams.pageSize) params.pageSize = queryParams.pageSize;
+    if (queryParams.limit) params.limit = queryParams.limit;
     if (queryParams.location) params.location = queryParams.location;
     if (queryParams.category) params.category = queryParams.category;
     if (queryParams.searchTerm) params.searchTerm = queryParams.searchTerm;
@@ -134,7 +134,7 @@ if (foundItems) {
         {/* Pagination Controls */}
         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
           <Pagination
-            count={Math.ceil((data?.meta?.total || 0) / queryParams.pageSize)}
+            count={Math.ceil((data?.meta?.total || 0) / queryParams.limit)}
             page={queryParams.page}
             onChange={handlePageChange}
           />

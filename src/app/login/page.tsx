@@ -22,6 +22,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useUserLoginMutation } from "@/redux/api/authApi";
 import setAccessToken from "../services/actions/setAccessToken";
+import DemoAccountModal from "./components/DemoAccountModal";
 
  const validationSchema = z.object({
   email: z.string().email("Please enter a valid email address!"),
@@ -30,6 +31,8 @@ import setAccessToken from "../services/actions/setAccessToken";
 
 const LoginPage = () => {
   const router = useRouter();
+  const [open,setOpen] = useState(false)
+
   const [error, setError] = useState("");
   const [userLogin, { isLoading: logging }] = useUserLoginMutation();
   const handleLogin = async (values: FieldValues) => {
@@ -113,7 +116,10 @@ const LoginPage = () => {
           )}
 
           {/* error message end */}
-
+          <DemoAccountModal open={open} setOpen={setOpen}/>
+          <Button size="small" variant="text" onClick={()=> setOpen(!open)}>
+            Demo Accounts
+          </Button>
           {/* */}
           <Box>
             <FKForm

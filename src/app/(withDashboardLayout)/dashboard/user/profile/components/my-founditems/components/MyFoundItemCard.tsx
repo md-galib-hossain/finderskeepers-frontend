@@ -180,7 +180,7 @@ const MyFoundItemCard = ({ foundItem }: { foundItem: any }) => {
               }}
               onClick={() => handleMarkAsClaim(foundItem.id)}
             >
-              Mark as Claimed
+              Mark Claimed
             </Button>
           )}
          
